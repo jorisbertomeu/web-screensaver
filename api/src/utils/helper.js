@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-export const generateRandomID = (length = DEFAULT_ID_LENGTH) => {
+export const generateRandomID = (length = 32) => {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     return Array.from(
         { length }, 

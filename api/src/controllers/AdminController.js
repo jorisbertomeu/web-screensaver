@@ -14,10 +14,14 @@ export class AdminController {
 
     async updateSettings(req, res, next) {
         try {
-            if (req.params.hasOwnProperty('id'))
+            if (req.params.id) {
+                console.log('Update', req.params.id);
                 await this.db.update('settings', req.params.id, req.body);
-            else
+            }
+            else {
+                console.log('Create')
                 await this.db.add('settings', req.body);
+            }
             res.json(req.body);
         } catch(e) {
             next(e);
