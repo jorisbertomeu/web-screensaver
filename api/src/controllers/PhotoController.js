@@ -18,15 +18,19 @@ export class PhotoController {
             let collections = settings.unsplash?.HACollectionsId;
 
             if (collections && collections.length > 0) {
-                const resp = await fetch(`${settings.hass.endpoint}/api/states/${collections}`, {
-                    headers: {
-                        Authorization: `Bearer ${settings.hass.token}`
+                try {
+                    const resp = await fetch(`${settings.hass.endpoint}/api/states/${collections}`, {
+                        headers: {
+                            Authorization: `Bearer ${settings.hass.token}`
+                        }
+                    });
+                    const data = await resp?.json();
+                    collections = data.state;
+                    if (collections.includes(',')) {
+                        collections = collections.split(',');
                     }
-                });
-                const data = await resp?.json();
-                collections = data.state;
-                if (collections.includes(',')) {
-                    collections = collections.split(',');
+                } catch(e) {
+                    collections = settings.unsplash.collectionsId;
                 }
             } else {
                 collections = settings.unsplash.collectionsId;
