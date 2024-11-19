@@ -1,0 +1,27 @@
+<img #bg1 class="background-img bg1"/>
+<img #bg2 class="background-img bg2" style="opacity: 0;"/>
+
+<div class="loader" *ngIf="isLoading">
+	<i class="fa fa-spinner fa-spin fa-4x text-primary"></i>
+</div>
+
+<div class="container-fluid">
+	<div class="row mt-4">
+		<div class="col-4 offset-4">
+			<div class="widget widget-clock rounded-5 shadow">
+				<div>{{currentClock.time}}</div>
+				<div style="font-size:32px;margin-top:-25px">{{currentClock.date}}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="footer px-3" *ngIf="bottomWidgets.length > 0">
+	<div class="row mb-4">
+		<div class="col" *ngFor="let w of bottomWidgets; let index = index">
+			<div class="widget widget-bottom rounded-3 shadow">
+				<i class="{{w.icon}} me-3 fa-fw"></i>{{w.value}}
+			</div>
+		</div>
+	</div>
+</footer>

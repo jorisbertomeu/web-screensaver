@@ -1,0 +1,126 @@
+<div class="container">
+	<div class="row mt-3 mb-3">
+		<div class="col-12">
+			<div class="card shadow">
+				<div class="card-body text-center">
+					<a href="/" class="float-start btn btn-primary btn-sm"><i class="fa fa-arrow-left me-2"></i>Back to Dashboard</a>
+					<h3 class="mb-0">Web Screensaver Admin Area</h3>
+					<small class="text-muted">Version 1.0.2</small>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-6 mt-3">
+			<div class="card shadow">
+				<div class="card-header">
+					<i class="fa fa-screwdriver-wrench me-2"></i>Main Settings
+				</div>
+				<div class="card-body">
+					<label class="form-label">Background Refresh Delay</label>
+					<div class="input-group mb-3">
+						<span class="input-group-text"><i class="fa fa-stopwatch"></i></span>
+						<input [(ngModel)]="settings.refreshDelay" type="number" class="form-control" placeholder="ex: 60">
+						<span class="input-group-text"> Seconds</span>
+					</div>
+					<label class="form-label">Native resolution (Width x Height)</label>
+					<div class="input-group mb-3">
+						<span class="input-group-text"><i class="fa fa-display"></i></span>
+						<input [(ngModel)]="settings.resolution.width" type="number" class="form-control" placeholder="ex: 1920">
+						<span class="input-group-text">x</span>
+						<input [(ngModel)]="settings.resolution.height" type="number" class="form-control" placeholder="ex: 1080">
+					</div>
+					<hr>
+					<div class="form-check form-switch mb-3">
+						<input [(ngModel)]="settings.unsplash.enabled" class="form-check-input" type="checkbox" role="switch" id="useUnsplashSwitch">
+						<label class="form-check-label" for="useUnsplashSwitch">Use Unsplash as Picture provider</label>
+					</div>
+					<ng-container *ngIf="settings.unsplash.enabled">
+						<div class="row mb-3">
+							<div class="col-12 col-md-6">
+								<label class="form-label">Access Key</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa fa-key"></i></span>
+									<input [(ngModel)]="settings.unsplash.accessKey" type="text" class="form-control" placeholder="ex: BRONXJ...">
+								</div>
+							</div>
+							<div class="col-12 col-md-6">
+								<label class="form-label">Secret Key</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="fa fa-lock"></i></span>
+									<input [(ngModel)]="settings.unsplash.secretKey" type="text" class="form-control" placeholder="ex: eGyRBNKsX...">
+								</div>
+							</div>
+						</div>
+						<label class="form-label">Unsplash Collections ID (Comma separeted)</label>
+						<div class="input-group mb-3">
+							<span class="input-group-text"><i class="fa fa-layer-group"></i></span>
+							<input [(ngModel)]="settings.unsplash.collectionsId" type="text" class="form-control" placeholder="ex: 1806988,1427155">
+						</div>
+					</ng-container>
+					<button [disabled]="isSaving" (click)="saveSettings()" class="btn btn-primary float-end"><i class="fa fa-save me-2"></i>Save</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 col-md-6 mt-3">
+			<div class="card shadow">
+				<div class="card-header">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Home_Assistant_Logo.svg" class="me-2" style="width: 24px;">HASS Configuration
+				</div>
+				<div class="card-body">
+					<label class="form-label">Home Assistant URL</label>
+					<div class="input-group mb-3">
+						<span class="input-group-text"><i class="fa fa-cog"></i></span>
+						<input [(ngModel)]="settings.hass.endpoint" type="text" class="form-control" placeholder="ex: https://home.myhome.com">
+					</div>
+					<label class="form-label">Long-Lived Access Token</label>
+					<div class="input-group mb-3">
+						<span class="input-group-text"><i class="fa fa-lock"></i></span>
+						<input [(ngModel)]="settings.hass.token" type="text" class="form-control" placeholder="ex: eyJhbGciOiJIUz...">
+					</div>
+					<button [disabled]="isSaving" (click)="saveSettings()" class="btn btn-primary float-end"><i class="fa fa-save me-2"></i>Save</button>
+				</div>
+				<div class="card-header border-top">
+					<i class="fa fa-cubes me-2"></i>Widgets
+					<button (click)="addWidget()" class="btn btn-clear float-end p-0"><i class="fa fa-circle-plus text-success"></i></button>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 mb-3" *ngFor="let w of widgets; let index = index">
+							<div class="card shadow">
+								<div class="card-header">
+									Widget #{{index+1}}
+									<button (click)="removeWidget(index)" class="btn btn-clear p-0 float-end">
+										<i class="fa fa-trash text-danger"></i>
+									</button>
+								</div>
+								<div class="card-body p-2">
+									<label class="form-label">HASS Entity</label>
+									<div class="input-group mb-2">
+										<span class="input-group-text"><i class="fa fa-cube"></i></span>
+										<input [(ngModel)]="w.entityId" type="text" class="form-control" placeholder="ex: sensor.temperature">
+									</div>
+									<label class="form-label">FA Icon</label>
+									<div class="input-group mb-2">
+										<span class="input-group-text"><i class="fa fa-icons"></i></span>
+										<input [(ngModel)]="w.icon" type="text" class="form-control" placeholder="ex: fa fa-cloud-sun text-secondary">
+										<span class="input-group-text"><i class="{{w.icon}}"></i></span>
+									</div>
+									<div class="row">
+										<div class="col-12 col-md-6">
+											<label class="form-label">Prefix</label>
+											<input [(ngModel)]="w.prefix" type="text" placeholder="ex: 🤷 IDK" class="form-control">
+										</div>
+										<div class="col-12 col-md-6">
+											<label class="form-label">Suffix</label>
+											<input [(ngModel)]="w.suffix" type="text" placeholder="ex: °C" class="form-control">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button [disabled]="isSaving" (click)="saveWidgets()" class="btn btn-primary float-end"><i class="fa fa-save me-2"></i>Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
