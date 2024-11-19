@@ -1,9 +1,9 @@
 import { generatePictureFilename } from '../utils/helper.js';
+import { UnsplashService } from './UnsplashService.js';
 
 export class PhotoService {
-    constructor(fileService, unsplashService) {
+    constructor(fileService) {
         this.fileService = fileService;
-        this.unsplashService = unsplashService;
     }
 
     async pickPictureFromFile(collections = [], burnPic = true) {
@@ -22,9 +22,10 @@ export class PhotoService {
 
                 return pic;
             }
-
-            const newPics = await this.unsplashService.getRandomPhotos(collections);
-            if (newPics.length === 0) return null;
+            const newPics = await UnsplashService.getRandomPhotos(collections);
+            if (newPics.length === 0) {
+                return null;
+            }
 
             this.fileService.writeJsonFile(filename, newPics);
             return newPics[0];
