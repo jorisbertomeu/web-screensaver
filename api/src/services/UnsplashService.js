@@ -10,7 +10,7 @@ export class UnsplashService {
         });
     }
 
-    async getRandomPhotos(collections = [], count = DEFAULT_PHOTO_COUNT) {
+    async getRandomPhotos(collections = [], count = 30) {
         try {
             const { response } = await this.api.photos.getRandom({
                 orientation: 'landscape',

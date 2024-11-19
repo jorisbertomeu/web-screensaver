@@ -6,7 +6,7 @@ export class PhotoService {
         this.fileService = fileService;
     }
 
-    async pickPictureFromFile(collections = [], burnPic = true) {
+    async pickPictureFromFile(collections = [], burnPic = true, unsplashCreds = null) {
         try {
             const filename = generatePictureFilename(collections.join(','));
             let pics = this.fileService.readJsonFile(filename);
@@ -22,7 +22,11 @@ export class PhotoService {
 
                 return pic;
             }
-            const newPics = await UnsplashService.getRandomPhotos(collections);
+            const unsplashService = new UnsplashService({
+                accessKey: unsplashCreds?.accessKey || '',
+                secretKey: unsplashCreds?.secretKey || ''
+            });
+            const newPics = await unsplashService.getRandomPhotos(collections);
             if (newPics.length === 0) {
                 return null;
             }

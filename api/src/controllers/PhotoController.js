@@ -18,7 +18,7 @@ export class PhotoController {
                 collections = Array.isArray(collections) ? collections : [collections];
             }
 
-            const photo = await this.photoService.pickPictureFromFile(collections, false);
+            const photo = await this.photoService.pickPictureFromFile(collections, false, settings.unsplash);
             
             if (!photo) {
                 return res.status(500).json({ error: 'Failed to fetch photo' });
