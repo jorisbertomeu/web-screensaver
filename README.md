@@ -57,6 +57,28 @@ L'interface d'administration (`/admin`) permet de configurer :
    - Icônes FontAwesome
    - Préfixes et suffixes personnalisés
 
+## Unsplash
+
+Les images de fond sont récupérées depuis **Unsplash** ou, en fallback, depuis [**Picsum**](https://picsum.photos/). 
+
+### Pourquoi Picsum ?
+Picsum propose un service gratuit et illimité, contrairement à Unsplash. Cependant, Picsum offre beaucoup moins de contenu, et il n'est pas possible de personnaliser les photos récupérées.
+
+### Utilisation d'Unsplash
+Pour utiliser Unsplash, vous devez :
+
+1. Créer un compte développeur sur [Unsplash Developers](https://unsplash.com/developers).
+2. Configurer une application.  
+   * **Coût** : Gratuit.  
+   * **Limite** : 50 requêtes par heure.
+
+### Optimisation via cache
+Pour contourner la limite de requêtes, un système de mise en cache a été mis en place côté API de **web-screensaver** :
+
+- Une seule requête récupère **30 images**.
+- Cela permet d'obtenir jusqu'à **1 500 images par heure**, tout en restant dans la limite imposée par Unsplash.
+
+
 ## 🖥️ Interface utilisateur
 
 ### Dashboard (`/` or `/dashboard`)
