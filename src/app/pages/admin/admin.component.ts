@@ -19,7 +19,8 @@ export class AdminComponent implements OnInit {
 			enabled: false,
 			accessKey: '',
 			secretKey: '',
-			collectionsId: ''
+			collectionsId: '',
+			HACollectionsId: ''
 		},
 		hass: {
 			endpoint: '',
@@ -49,7 +50,8 @@ export class AdminComponent implements OnInit {
 					enabled: respJson?.unsplash?.enabled || false,
 					accessKey: respJson?.unsplash?.accessKey || '',
 					secretKey: respJson?.unsplash?.secretKey || '',
-					collectionsId: respJson?.unsplash?.collectionsId ? respJson?.unsplash?.collectionsId.join(',') : ''
+					collectionsId: respJson?.unsplash?.collectionsId ? respJson?.unsplash?.collectionsId.join(',') : '',
+					HACollectionsId: respJson?.unsplash?.HACollectionsId || ''
 				},
 				hass: {
 					endpoint: respJson?.hass?.endpoint || '',

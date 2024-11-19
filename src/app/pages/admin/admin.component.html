@@ -55,6 +55,14 @@
 							<span class="input-group-text"><i class="fa fa-layer-group"></i></span>
 							<input [(ngModel)]="settings.unsplash.collectionsId" type="text" class="form-control" placeholder="ex: 1806988,1427155">
 						</div>
+						<label class="form-label">Unsplash Collections ID from HA Entity</label>
+						<div class="input-group mb-3">
+							<span class="input-group-text"><i class="fa fa-layer-group"></i></span>
+							<input [(ngModel)]="settings.unsplash.HACollectionsId" type="text" class="form-control" placeholder="ex: input_text.unsplash_collections">
+						</div>
+						<div class="alert alert-primary">
+							You can <b>specify a Home Assistant entity</b> that contains the Unsplash Collections ID. This way you can <b>change the collections directly</b> from Home Assistant.<br>For example, you can use an <b>input_text entity</b> with the collections ID as the value separated by commas.<br><br>If you use this option, the collections ID field <b>will be ignored</b>.
+						</div>
 					</ng-container>
 					<button [disabled]="isSaving" (click)="saveSettings()" class="btn btn-primary float-end"><i class="fa fa-save me-2"></i>Save</button>
 				</div>
