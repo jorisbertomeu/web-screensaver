@@ -1,27 +1,98 @@
-# WebScreensaver
+# 🖼️ Web Screensaver
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
+[![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Unsplash](https://img.shields.io/badge/Unsplash-000000?style=for-the-badge&logo=Unsplash&logoColor=white)](https://unsplash.com/)
+[![Home Assistant](https://img.shields.io/badge/Home%20Assistant-41BDF5?style=for-the-badge&logo=home-assistant&logoColor=white)](https://www.home-assistant.io/)
 
-## Development server
+Un écran de veille web moderne qui affiche une horloge élégante, des photos Unsplash et des widgets Home Assistant personnalisables. Parfait pour les tableaux de bord d'information, les écrans d'ambiance ou l'écran de veille de Fully Kiosk.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+[![Dashboard Screenshot](./imgs/dash.png)](./imgs/dash.png)
 
-## Code scaffolding
+## ✨ Fonctionnalités
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 🕒 Horloge élégante avec date
+- 📸 Rotation automatique de fonds d'écran via Unsplash avec choix du thème
+- 🏠 Intégration avec Home Assistant
+- 🎛️ Widgets personnalisables
+- ⚙️ Interface d'administration intuitive
+- 📱 Design responsive
+- 🎨 Thème moderne
 
-## Build
+## 🚀 Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Prérequis
 
-## Running unit tests
+- Docker
+- Compte développeur Unsplash (Facultatif)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Build de l'image Docker
+Se placer dans le répertoire du projet:
 
-## Running end-to-end tests
+``docker build -t web-screensaver .``
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### Démarrer le container
 
-## Further help
+``docker run -d -v ./api/res:/app/api/res -p 80:80 --name my-web-screensaver web-screensaver``
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Le service écoute alors sur le port 8080. Vous pouvez vous y rendre via http://<IP>:8080 pour accéder au dashboard ou sur http://<IP>:8080/admin pour accéder à l'interface d'administration.
+
+## ⚙️ Configuration
+
+### Interface d'administration
+
+L'interface d'administration (`/admin`) permet de configurer :
+
+#### Paramètres principaux
+- ⏱️ Délai de rafraîchissement des fonds d'écran
+- 📐 Résolution native
+- 🔑 Clés d'API Unsplash
+- 📂 Collections Unsplash
+
+#### Configuration Home Assistant
+- 🔗 URL du serveur
+- 🔑 Token d'accès longue durée
+- 🎛️ Configuration des widgets
+   - Entités HASS
+   - Icônes FontAwesome
+   - Préfixes et suffixes personnalisés
+
+## 🖥️ Interface utilisateur
+
+### Dashboard (`/` or `/dashboard`)
+
+[![Dashboard Screenshot](./imgs/dash.png)](./imgs/dash.png)
+
+### Admin (`/admin`)
+
+[![Admin Screenshot](./imgs/admin.png)](./imgs/admin.png)
+
+## 📝 Notes de version
+
+### Version 1.0.2
+- ✨ Nouveau design des widgets
+- 🐛 Corrections de bugs
+- 🚀 Optimisation des performances
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à :
+
+1. Fork le projet
+2. Créer une branche (`git checkout -b feature/AmazingFeature`)
+3. Commit (`git commit -m 'Add AmazingFeature'`)
+4. Push (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+## 📜 Licence
+
+Distribué sous la licence MIT.
+
+## 🙏 Remerciements
+
+- [Unsplash](https://unsplash.com) pour les magnifiques photos
+- [Home Assistant](https://www.home-assistant.io/) pour leur excellente API
+
+---
+
+Fait avec ❤️ par Joris Bertomeu
